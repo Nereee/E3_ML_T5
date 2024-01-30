@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+	font-family: 'Trebuchet MS';
+}
+
+body {
+    background-color: wheat;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+header{
+    width: 100vw;
+    height: 18vh;
+}
+
+#logoa {
+    background-color: #0D0D0D;
+    width: 200px;
+    height: 130px;
+    margin-top: 5px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+header h1 {
+    display: inline-block;
+    vertical-align: top;
+	font-size: 50px;
+    margin-top: 50px;
+}
+
+.centrarlogo {
+	float: left;
+}
+
+.menua ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    list-style: none;
+	font-size: 30px;
+    padding: 0px;
+	margin: 0px;
+}
+
+.menua ul li {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.menua ul li a{
+    background-color: #0D0D0D;
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: .3em 1em;
+    height: 45px;
+	margin-top: 50px;
+	transition: color 0.2s;
+}
+
+.menua ul li a:hover{
+  color: wheat;
+}
+
+.menua ul li ul{
+    display: none;
+    background-color: black;
+}
+
+.menua ul li ul:hover, .menua ul li a:hover + ul{
+    display: block;
+}
+
+section {
+    margin: 7vh 5vw auto 4vw;
+}
+
+section img {
+    width: 50%;
+    padding-right: 25px;
+    max-width: 450px;
+    min-width: 250px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.infofilma {
+    display: flex;
+    flex-direction: row;
+}
+
+.erdikoa, .ezkuina {
+    font-size: 20px;
+}
+
+.erdikoa h3, .ezkuina h3 {
+    color: black;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+#trailerhandia {
+    margin: 5vh auto 5vh auto;
+    text-align: center;
+}
+
+#trailerhandia iframe {
+    width: 55vw;
+    min-width: 150px;
+    max-width: 900px;
+    height: 35vh;
+
+}
+
+footer {
+    color: white;
+    padding: 20px;
+    background-color: #120F26;
+    height: 50%; 
+    max-height: fit-content;
+}
+
+footer ul, footer a {
+    list-style: none;
+    text-decoration: none;
+    font-size: 25px;
+    transition: color 0.3s;
+    color: white;
+}
+
+footer li {
+    margin-bottom: 20px;
+    color: white;
+}
+
+footer a:hover {
+    color:wheat;
+}
+
+#saresozialak {
+    float: right;
+    position: relative;
+    overflow: hidden;
+}
+
+#copy {
+    font-size: 20px;
+
+    margin-top: 20px;
+}
+
+footer img {
+    width: 50px;    
+    margin: 10px 10px auto 5px;
+    transition: transform 0.5s ease;
+}
+
+#instagram:hover, #facebook:hover, #twitter:hover {
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 1206px) {
+    .infofilma {
+        flex-direction: column;
+    }
+
+    section {
+        margin-top: 200px;
+    }
+
+    .erdikoa {
+        margin-top: 50px;
+    }
+
+}
+
+@media screen and (max-width: 840px) {
+    .menu ul {
+        flex-direction: column;
+    }
+
+    #logoa {
+        margin-top: 48px;
+    }
+    
+    section {
+        margin-top: 300px;
+    }
+
+}
