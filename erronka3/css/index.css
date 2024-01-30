@@ -5,6 +5,11 @@ main {
     margin: 10px 0;
 }
 
+header p {
+    float: right;
+    margin: 10px;
+}
+
 article {
     text-align: center;
     margin: 20px;
