@@ -1,0 +1,51 @@
+.colum{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    text-align: justify;
+    align-items: center;
+}
+
+article h2 {
+    font-size: 40px;
+    width: 70%;
+    text-align: center;
+}
+
+article p {
+    font-size: 20px;
+    width: 100%;
+    padding: 10px 50px;
+
+   
+}
+
+article img {
+    width: 250px;
+}
+
+.egileak {
+    width: 70%;
+    text-align: center;
+}
+
+article img {
+    padding: 5px;
+    width: 35vw;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    /* Textuaren tamaina jaitsi */
+    article h2 {
+        font-size: 30px;
+        width: 70%;
+        text-align: center;
+    }
+
+    article p {
+        font-size: 16px;
+        margin: 2px 20px;
+        width: 100%;
+    }
+}
