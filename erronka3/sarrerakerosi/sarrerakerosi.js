@@ -17,5 +17,5 @@ sarrerakerosiButton.onclick = function (e) {
     };
 
     console.log(data);
-    window.location.replace('C:/Users/in1dm3-d/Desktop/erronka3/logina/logina.html');
+    window.location.replace('../logina/logina.html');
 };

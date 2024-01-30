@@ -21,5 +21,5 @@ button.onclick = function (e) {
 
     console.log(data);
 
-     window.location.href = 'C:/Users/in1dm3-d/Desktop/erronka3/logina/logina.html';
+     window.location.href = '../logina/logina.html';
 };
