@@ -119,51 +119,76 @@ h1 {
 
 }
 
+.button-container {
+    text-align: center; /* Alinea el contenido del contenedor al centro */
+}
+
+button {
+    color: #ffc65d;
+    border: none;
+    background: linear-gradient(to right, #000000, #000000);
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    margin: auto; /* Centra el botón */
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+
 footer {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(33, 33, 33);
     color: white;
     padding: 20px;
-    background-color: #120F26;
-    height: 50%; 
-    max-height: fit-content;
+    text-align: center;
+
 }
 
-footer ul, footer a {
-    list-style: none;
+.footer {
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: white;
     text-decoration: none;
-    font-size: 25px;
-    transition: color 0.3s;
-    color: white;
-}
-
-footer li {
-    margin-bottom: 20px;
-    color: white;
 }
 
 footer a:hover {
-    color:wheat;
+    color: wheat;
+    text-decoration: underline;
 }
 
-#saresozialak {
-    float: right;
-    position: relative;
-    overflow: hidden;
+.redes-sociales a {
+    margin-right: 10px;
 }
 
-#copy {
-    font-size: 20px;
-
-    margin-top: 20px;
+.redes-sociales a img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
 }
 
-footer img {
-    width: 50px;    
-    margin: 10px 10px auto 5px;
-    transition: transform 0.5s ease;
+.redes-sociales a img:hover {
+    transform: scale(1.2);
 }
 
-#instagram:hover, #facebook:hover, #twitter:hover {
-    transform: scale(1.1);
+.creative-commons img {
+    width: 88px;
+    height: 31px;
 }
 
 @media screen and (max-width: 1206px) {

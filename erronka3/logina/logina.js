@@ -12,5 +12,5 @@ button.onclick = function (e) {
 
     console.log(data);
 
-     window.location.href = 'C:\\Users\in1dm3-d\Desktop\erronka3\index\index.html';
+    window.location.replace('C:/Users/in1dm3-d/Desktop/erronka3/index/index.html');
 };
