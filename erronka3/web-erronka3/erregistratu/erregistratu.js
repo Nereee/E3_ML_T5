@@ -18,22 +18,8 @@ button.onclick = function (e) {
         pasahitzaerrepikatu: pasahitzaerrepikatu.value
     };
 
-    if (pasahitza.value !== pasahitzaerrepikatu.value) {
-        window.alert('Pasahitzak ez datoz bat.');
-        return;
-    }
-
-    if (pasahitza.value == '') {
-        window.alert('Pasahitz bat idatzi.')
-        return;
-    }
-
-    if (!pasahitza.value || pasahitza.value.length < 8) {
-        alert('Pasahitzak gutxienez 8 karaktere izan behar ditu.');
-        return;
-    }
 
     console.log(data);
 
-    window.location.href = '../logina/logina.html';
+     window.location.href = 'C:/Users/in1dm3-d/Desktop/erronka3/logina/logina.html';
 };
