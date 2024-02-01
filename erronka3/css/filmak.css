@@ -5,218 +5,39 @@
 	font-family: 'Trebuchet MS';
 }
 
-body {
-    background-color: wheat;
-	padding-left: 30px;
-	padding-right: 30px;
-}
-
-header{
-    width: 100vw;
-    height: 18vh;
-}
-
-#logoa {
-    background-color: #0D0D0D;
-    width: 200px;
-    height: 130px;
-    margin-top: 5px;
-	padding-left: 30px;
-	padding-right: 30px;
-}
-
-header h1 {
-    display: inline-block;
-    vertical-align: top;
-	font-size: 50px;
-    margin-top: 50px;
-}
-
-.centrarlogo {
-	float: left;
-}
-
-.menua ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+main{
+    display:  flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    list-style: none;
-	font-size: 30px;
-    padding: 0px;
-	margin: 0px;
-}
-
-.menua ul li {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.menua ul li a{
-    background-color: #0D0D0D;
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: .3em 1em;
-    height: 45px;
-	margin-top: 50px;
-	transition: color 0.2s;
-}
-
-.menua ul li a:hover{
-  color: wheat;
-}
-
-.menua ul li ul{
-    display: none;
-    background-color: black;
-}
-
-.menua ul li ul:hover, .menua ul li a:hover + ul{
-    display: block;
-}
-
-section {
-    margin: 7vh 5vw auto 4vw;
-}
-
-section img {
-    width: 50%;
-    padding-right: 25px;
-    max-width: 450px;
-    min-width: 250px;
-}
-
-h1 {
-    text-align: center;
 }
 
 .infofilma {
     display: flex;
     flex-direction: row;
-}
-
-.erdikoa, .ezkuina {
-    font-size: 20px;
-}
-
-.erdikoa h3, .ezkuina h3 {
-    color: black;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-
-#trailerhandia {
-    margin: 5vh auto 5vh auto;
-    text-align: center;
-}
-
-#trailerhandia iframe {
-    width: 55vw;
-    min-width: 150px;
-    max-width: 900px;
-    height: 35vh;
-
-}
-
-.button-container {
-    text-align: center; /* Alinea el contenido del contenedor al centro */
-}
-
-button {
-    color: #ffc65d;
-    border: none;
-    background: linear-gradient(to right, #000000, #000000);
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 20px;
-    margin: auto; /* Centra el botón */
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-
-
-footer {
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(33, 33, 33);
-    color: white;
-    padding: 20px;
-    text-align: center;
-
-}
-
-.footer {
-    flex-grow: 1;
     flex-wrap: wrap;
+    padding: 20px;
+}
+.erdikoa{
+    border-top: 10px;
+    flex-grow: 1;
+    padding: 20px;
 }
 
-footer ul {
-    list-style-type: none;
-    padding: 0;
-}
 
-footer ul li {
-    margin-bottom: 10px;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: wheat;
-    text-decoration: underline;
-}
-
-.redes-sociales a {
-    margin-right: 10px;
-}
-
-.redes-sociales a img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    transition: transform 0.3s ease-in-out;
-}
-
-.redes-sociales a img:hover {
-    transform: scale(1.2);
-}
-
-.creative-commons img {
-    width: 88px;
-    height: 31px;
-}
-
-@media screen and (max-width: 1206px) {
-    .infofilma {
-        flex-direction: column;
-    }
-
-    section {
-        margin-top: 200px;
-    }
-
-    .erdikoa {
-        margin-top: 50px;
-    }
-
-}
-
-@media screen and (max-width: 840px) {
-    .menu ul {
-        flex-direction: column;
-    }
-
-    #logoa {
-        margin-top: 48px;
-    }
+main img {
     
-    section {
-        margin-top: 300px;
-    }
-
+    width: 300px;
+    height: 400px;
+    max-height: 100%;
 }
+.button-container {
+    display: flex; 
+    text-align: center;
+   
+    height: 50px;
+}
+#sarrerakerosiButton{
+ justify-content: center;
+ width: 200px;
+ height: 30px;
+    margin: auto;}
