@@ -16,6 +16,11 @@ sarrerakerosiButton.onclick = function (e) {
         erabiltzaile: erabiltzaile.value
     };
 
+    if (erabiltzaile.value == '') {
+        window.alert('Pasahitz bat idatzi.')
+        return;
+    }
+
     console.log(data);
     window.location.replace('../logina/logina.html');
 };

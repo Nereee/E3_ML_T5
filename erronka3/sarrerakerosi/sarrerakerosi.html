@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarrerak</title>
     <link rel="stylesheet" href="sarrerakerosi.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <form action="#">
@@ -14,30 +14,43 @@
 
         <label>
             <i class="fa-solid fa-film"></i>
-            <input placeholder="Pelikula" type="text" id="pelikula">
+            <select id="pelikula">
+                <option value="Handia">Handia</option>
+                <option value="La lista de Schindler">La lista de Schindler</option>
+                <option value="Cadena Perpetua">Cadena Perpetua</option>
+                <option value="Million Dollar Baby">Million Dollar Baby</option>
+                <option value="Psicosis">Psicosis</option>
+                <option value="El Resplandor">El Resplandor</option>
+                <option value="Drácula">Drácula</option>
+                <option value="Cisne negro">Cisne negro</option>
+                <option value="2001: Odisea en el espacio">2001: Odisea en el espacio</option>
+                <option value="Alien, el octavo pasajero">Alien, el octavo pasajero</option>
+                <option value="El Planeta De Los Simios">El Planeta De Los Simios</option>
+                <option value="La Novia De Frankestein">La Novia De Frankestein</option>
+                <option value="Scary movie">Scary movie</option>
+                <option value="El Gran Lebowsky">El Gran Lebowsky</option>
+                <option value="La Vida De Brian">La Vida De Brian</option>
+                <option value="Aterriza Como Puedas">Aterriza Como Puedas</option>
+            </select>
         </label>
         <label>
             <i class="fa-solid fa-clock"></i>
-            <input placeholder="Ordua" type="time" id="ordua">
-        </label>
-        <label>
-            <i class="fa-solid fa-clock"></i>
-            <input placeholder="Ordua" type="time" id="ordua">
+            <input type="time" id="ordua">
         </label>
         <label>
             <i class="fa-solid fa-money-bill"></i>
-            <input placeholder="Prezioa" type="number" id="prezioa">
+            <input type="number" id="prezioa">
         </label>
         <label>
             <i class="fa-solid fa-ticket"></i>
-            <input placeholder="Sarrera Kantitatea" type="number" id="sarrerak">
+            <input type="number" id="sarrerak" placeholder="Sarrera kantitatea">
         </label>
         <label>
             <i class="fa-solid fa-user"></i>
-            <input placeholder="Erabiltzaile" type="text" id="erabiltzaile">
+            <input type="text" id="erabiltzaile" placeholder="Erabiltzaile izena">
         </label>
 
-        <button id="sarrerakerosiButton"><h3>Sarrerak erosi</h3></button>
+        <button id="sarrerakerosiButton">Sarrerak erosi</button>
     </form>
 
     <script src="sarrerakerosi.js"></script>
