@@ -5,9 +5,11 @@ main {
     margin: 10px 0;
 }
 
-header p {
-    float: right;
+#login {
     margin: 10px;
+    width: 2%;
+    position: absolute;
+    right: 1%;
 }
 
 article {
