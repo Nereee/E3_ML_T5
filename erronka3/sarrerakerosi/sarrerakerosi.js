@@ -1,26 +1,20 @@
-const pelikula = document.getElementById('pelikula');
-const ordua = document.getElementById('ordua');
+const zinema = document.getElementById('zinemak');
+const ordua = document.getElementById('saioak');
+const data = document.getElementById('data');
 const prezioa = document.getElementById('prezioa');
-const sarrerak = document.getElementById('sarrerak');
-const erabiltzaile = document.getElementById('erabiltzaile');
+const kant = document.getElementById('kant');
 const sarrerakerosiButton = document.getElementById('sarrerakerosiButton');
 
 sarrerakerosiButton.onclick = function (e) {
     e.preventDefault();
 
     const data = {
-        pelikula: pelikula.value,
+        zinema: zinema.value,
         ordua: ordua.value,
         prezioa: prezioa.value,
-        sarrerak: sarrerak.value,
-        erabiltzaile: erabiltzaile.value
+        kant: kant.value,
     };
 
-    if (erabiltzaile.value == '') {
-        window.alert('Pasahitz bat idatzi.')
-        return;
-    }
-
     console.log(data);
-    window.location.replace('../logina/logina.html');
+    window.location.replace('../logina/logina.php');
 };
