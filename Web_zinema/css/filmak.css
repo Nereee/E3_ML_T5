@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+	font-family: 'Trebuchet MS';
+}
+
+main{
+    display:  flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.infofilma {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+.erdikoa{
+    border-top: 10px;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.ezkuina {
+    
+}
+
+main img {
+    
+    width: 300px;
+    height: 400px;
+    max-height: 100%;
+}
+.button-container {
+    display: flex; 
+    text-align: center;
+   
+    height: 50px;
+}
+#sarrerakerosiButton{
+ justify-content: center;
+ width: 200px;
+ height: 30px;
+    margin: auto;}
