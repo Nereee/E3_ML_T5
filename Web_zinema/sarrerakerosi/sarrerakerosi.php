@@ -1,24 +1,3 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "db_elorrietazinema";
-
-// Konexioa sortu
-$mysqli = new mysqli($servername, $username, $password, $db);
-
-// Konexioa egiaztatu
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-  }  
-  // $sql = "Select izena from filma where filma_id = filmid";
-  // $mysqli -> query($sql)
-
-// Konexioa itxi
-//$mysqli->close();
-
-?>
-
 <!DOCTYPE html>
 <html lang="eu">
 <head>
@@ -27,7 +6,6 @@ if ($mysqli->connect_error) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarrerak</title>
     <link rel="stylesheet" href="sarrerakerosi.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body onload= "datuakkargatu()">
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
@@ -96,59 +74,25 @@ function datuakkargatu() {
     let filmid = window.location.href.split("=")[1]
     console.log(filmid)
 }
-        function ZinemaIzena(){
-            <?php
-            $mysqli = new mysqli("localhost","root","", "db_Elorrietazinema");
-            $sql = "SELECT izena FROM zinema";
-            $result = $mysqli->query($sql);
-            while ($row = $result->fetch_assoc()) {
-                ?>
-                    var aukera = document.createElement("option");
-                    aukera.value = "<?php echo $row['izena']; ?>";
-                    aukera.textContent = "<?php echo $row['zinema_izena']; ?>";
-                    zinema.appendChild(aukera);
+function ZinemaIzena(){
+    <?php
+    $mysqli = new mysqli("localhost", "root", "", "db_Elorrietazinema");
+    $sql = "SELECT izena FROM ZINEMA";
+    $result = $mysqli->query($sql);
+    ?>
+    var zinema = document.getElementById("zinemak");
+    <?php
+    while ($row = $result->fetch_assoc()) {
     
-                <?php
-                }
-            ?>
-            <?php
-                if(isset($_GET['zinema'])){
-                ?>
-                document.getElementById('zinema').value = "<?php echo $_GET['zinema']?>";
-                <?php       
-                $zinema = $_GET['zinema'];          
-                $sql = "SELECT DISTINCT id_filma,film_izena FROM filma JOIN saioa using (id_filma)  WHERE id_zinema = $zinema ";
-                $result = $mysqli->query($sql);
-                while ($row = $result->fetch_assoc()) {
-                ?>
-                    var aukera = document.createElement("option");
-                    aukera.value = "<?php echo $row['id_filma']; ?>";
-                    aukera.textContent = "<?php echo $row['film_izena']; ?>";
-                    document.getElementById('pelikula').appendChild(aukera);
-                <?php
-                }
-            }
-            ?>
-            <?php 
-            if(isset($_GET['zinema']) && isset($_GET['filma'])){ // Agrega isset para verificar si ambos parámetros existen
-            ?>
-                document.getElementById('pelikula').value = "<?php echo $_GET['filma'] ?>"; // Corrige el nombre de la función getElementById
-
-                document.getElementById('eguna').value = "<?php echo $_GET['zinema'] ?>"; // Corrige el nombre de la función getElementById
-
-            <?php
-                $zinema = $_GET['zinema'];
-                $filma = $_GET['filma'];
-            }
-            ?>
-            
+        var aukera = document.createElement("option");
+        aukera.value = "<?php echo $row['izena']; ?>";
+        aukera.textContent = "<?php echo $row['izena']; ?>";
+        zinema.appendChild(aukera);
+     }
+     ?>
     }
-    
-    function Zinema_url(){
-            let zinema = document.getElementById("zinema");
-            window.location = window.location.pathname + "?zinema="+zinema.value;
 
-        }
+ 
     </script>
 </body>
 </html>
