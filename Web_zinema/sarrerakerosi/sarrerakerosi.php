@@ -11,7 +11,6 @@ $mysqli = new mysqli($servername, $username, $password, $db);
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
   }  
-
   // $sql = "Select izena from filma where filma_id = filmid";
   // $mysqli -> query($sql)
 
@@ -39,11 +38,6 @@ if ($mysqli->connect_error) {
         <label for = "zinemak">
             <i class="fa-solid fa-film"></i>
             <select id="zinemak">
-                <option value="Elorrieta">Elorrieta-errekamari zinema</option>
-                <option value="Basauri">Basauri Zinema</option>
-                <option value="Bilbao">Ideal Zinema</option>
-                <option value="Portugalete">Portugalete Zinema</option>
-                <option value="Gazteiz">Gazteiz zinema</option>
             </select>
         </label>
         <label for = "data">
@@ -101,11 +95,60 @@ function datuakkargatu() {
 
     let filmid = window.location.href.split("=")[1]
     console.log(filmid)
-
-    
-   
 }
+        function ZinemaIzena(){
+            <?php
+            $mysqli = new mysqli("localhost","root","", "db_Elorrietazinema");
+            $sql = "SELECT izena FROM zinema";
+            $result = $mysqli->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                ?>
+                    var aukera = document.createElement("option");
+                    aukera.value = "<?php echo $row['izena']; ?>";
+                    aukera.textContent = "<?php echo $row['zinema_izena']; ?>";
+                    zinema.appendChild(aukera);
+    
+                <?php
+                }
+            ?>
+            <?php
+                if(isset($_GET['zinema'])){
+                ?>
+                document.getElementById('zinema').value = "<?php echo $_GET['zinema']?>";
+                <?php       
+                $zinema = $_GET['zinema'];          
+                $sql = "SELECT DISTINCT id_filma,film_izena FROM filma JOIN saioa using (id_filma)  WHERE id_zinema = $zinema ";
+                $result = $mysqli->query($sql);
+                while ($row = $result->fetch_assoc()) {
+                ?>
+                    var aukera = document.createElement("option");
+                    aukera.value = "<?php echo $row['id_filma']; ?>";
+                    aukera.textContent = "<?php echo $row['film_izena']; ?>";
+                    document.getElementById('pelikula').appendChild(aukera);
+                <?php
+                }
+            }
+            ?>
+            <?php 
+            if(isset($_GET['zinema']) && isset($_GET['filma'])){ // Agrega isset para verificar si ambos parámetros existen
+            ?>
+                document.getElementById('pelikula').value = "<?php echo $_GET['filma'] ?>"; // Corrige el nombre de la función getElementById
 
+                document.getElementById('eguna').value = "<?php echo $_GET['zinema'] ?>"; // Corrige el nombre de la función getElementById
+
+            <?php
+                $zinema = $_GET['zinema'];
+                $filma = $_GET['filma'];
+            }
+            ?>
+            
+    }
+    
+    function Zinema_url(){
+            let zinema = document.getElementById("zinema");
+            window.location = window.location.pathname + "?zinema="+zinema.value;
+
+        }
     </script>
 </body>
 </html>
