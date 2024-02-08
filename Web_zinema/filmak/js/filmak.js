@@ -1,10 +1,10 @@
-// sarrerakerosiButton.onclick = function (e) {
-//     e.preventDefault();
+    sarrerakerosiButton.onclick = function (e) {
+    e.preventDefault();
 
-//     window.location.replace('../../sarrerakerosi/sarrerakerosi.php');
+    window.location.replace('../../sarrerakerosi/sarrerakerosi.php');
 
-    
-// };
+
+};
 function lehioa() {
     let filma = document.getElementById("id_film").value
 
@@ -13,15 +13,14 @@ function lehioa() {
 
 }
 
-function datuakkargatu(){
+function datuakkargatu() {
     let filmid = window.location.href.split("=")[1]
-    window.alert(filmid)
+    window.alert(filmid);
+
+    //  0<? php
+    // $filmid = $_POST['filmid'];
+    // echo "La variable filmid es: ".$filmid;
+    //  $sql = "Select izena from filma where id_filma = filmid";
+    //  $mysqli -> query($sql)
    
-    <?php
-    $filmid = $_POST['filmid'];
-    echo "La variable filmid es: " . $filmid;
-    $sql = "Select izena from filma where id_filma = filmid";
-    $mysqli -> query ($sql) 
-    ?>
-    
 }

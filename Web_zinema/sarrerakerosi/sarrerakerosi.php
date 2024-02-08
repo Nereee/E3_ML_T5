@@ -29,11 +29,11 @@ if ($mysqli->connect_error) {
 </head>
 <body onload= "datuakkargatu()">
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
-    <form action="#">
+    <form action="sarrerakerosi.php" method = "get" id = "sarrerakerosi" name = "sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
-        <label for="pelikulak">Pelikula</label>
+        <label for="pelikula">Pelikula</label>
         <input type="text" id="pelikula">
-        <label>
+        <label for = "zinemak">
             <i class="fa-solid fa-film"></i>
             <select id="zinemak">
                 <option value="Elorrieta">Elorrieta-errekamari zinema</option>
@@ -43,11 +43,11 @@ if ($mysqli->connect_error) {
                 <option value="Gazteiz">Gazteiz zinema</option>
             </select>
         </label>
-        <label>
+        <label for = "data">
             <i class="fa-solid fa-calendar"></i>
             <input type="date" id="data">
         </label>
-        <label>
+        <label for = "saioak">
             <i class="fa-solid fa-clock"></i>
             <select id="saioak">
                 <option value="12:20">12:20</option>
@@ -55,13 +55,13 @@ if ($mysqli->connect_error) {
                 <option value="20:00">20:00</option>
             </select>
         </label>
-        <label>
+        <label for = "kant">
             <i class="fa-solid fa-ticket"></i>
-            <input type="number" id="kant" value="0">
+            <input type="number" id="kant" value="1" min="1">
         </label>
-        <label>
+        <label for = "prezioa">
             <i class="fa-solid fa-money-bill"></i>
-            <input type="number" id="prezioa" value="0.00">
+            <input type="number" id="prezioa" value="9.50" readonly>
         </label>
 
         <button id="sarrerakerosiButton">Sarrerak erosi</button>
