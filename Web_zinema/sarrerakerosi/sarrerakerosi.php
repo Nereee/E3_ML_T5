@@ -7,22 +7,71 @@
     <title>Sarrerak</title>
     <link rel="stylesheet" href="sarrerakerosi.css">
 </head>
-<body onload= "datuakkargatu()">
+<body>
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
-    <form action="sarrerakerosi.php" method = "get" id = "sarrerakerosi" name = "sarrerakerosi">
+    <form action="sarrerakerosi.php" method="get" id="sarrerakerosi" name="sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
-        <label for="pelikula">Pelikula</label>
-        <input type="text" id="pelikula">
-        <label for = "zinemak">
+        <label for="pelikula">
+    Pelikula: 
+    
+    <?php
+    $mysqli = new mysqli("localhost", "root", "", "db_Elorrietazinema");
+    if ($mysqli->connect_errno) {
+        echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+        exit();
+    }
+   
+    $sql = "SELECT izena FROM FILMA WHERE filma_id = ?";
+    $stmt = $mysqli->prepare($sql);
+    
+    if (!$stmt) {
+        echo "Error al preparar la consulta: (" . $mysqli->errno . ") " . $mysqli->error;
+        exit();
+    }
+    
+    $stmt->bind_param("i", $pelikula_id);
+    
+    if (!$stmt->execute()) {
+        echo "Error al ejecutar la consulta: (" . $stmt->errno . ") " . $stmt->error;
+        exit();
+    }
+    
+    $stmt->bind_result($pelikula_izena);
+    $stmt->fetch();
+
+    echo "<input readonly type='text' value='" . $pelikula_izena . "' >";
+
+    $stmt->close();
+    $mysqli->close();
+    ?>
+</label>
+        <label for="zinemak">
             <i class="fa-solid fa-film"></i>
             <select id="zinemak">
+                <?php
+                $mysqli = new mysqli("localhost", "root", "", "db_Elorrietazinema");
+                if ($mysqli->connect_errno) {
+                    echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+                    exit();
+                }
+                
+                $sql = "SELECT zinema_id, izena FROM ZINEMA";
+                $result = $mysqli->query($sql);
+                
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['zinema_id'] . "'>" . $row['izena'] . "</option>";
+                }
+                
+                $result->free();
+                $mysqli->close();
+                ?>
             </select>
         </label>
-        <label for = "data">
+        <label for="data">
             <i class="fa-solid fa-calendar"></i>
             <input type="date" id="data">
         </label>
-        <label for = "saioak">
+        <label for="saioak">
             <i class="fa-solid fa-clock"></i>
             <select id="saioak">
                 <option value="12:20">12:20</option>
@@ -30,11 +79,11 @@
                 <option value="20:00">20:00</option>
             </select>
         </label>
-        <label for = "kant">
+        <label for="kant">
             <i class="fa-solid fa-ticket"></i>
             <input type="number" id="kant" value="1" min="1">
         </label>
-        <label for = "prezioa">
+        <label for="prezioa">
             <i class="fa-solid fa-money-bill"></i>
             <input type="number" id="prezioa" value="9.50" readonly>
         </label>
@@ -42,57 +91,6 @@
         <button id="sarrerakerosiButton">Sarrerak erosi</button>
     </form>
 
-
-<script>
-
-const zinema = document.getElementById('zinemak');
-const ordua = document.getElementById('saioak');
-const data = document.getElementById('data');
-const prezioa = document.getElementById('prezioa');
-const kant = document.getElementById('kant');
-const sarrerakerosiButton = document.getElementById('sarrerakerosiButton');
-
-sarrerakerosiButton.onclick = function (e) {
-    e.preventDefault();
-
-    const data = {
-        zinema: zinema.value,
-        ordua: ordua.value,
-        prezioa: prezioa.value,
-        kant: kant.value,
-    };
-
-    console.log(data);
-    window.location.replace('../logina/logina.php');
-};
-
-
-function datuakkargatu() {
-    
-
-
-    let filmid = window.location.href.split("=")[1]
-    console.log(filmid)
-}
-function ZinemaIzena(){
-    <?php
-    $mysqli = new mysqli("localhost", "root", "", "db_Elorrietazinema");
-    $sql = "SELECT izena FROM ZINEMA";
-    $result = $mysqli->query($sql);
-    ?>
-    var zinema = document.getElementById("zinemak");
-    <?php
-    while ($row = $result->fetch_assoc()) {
-    
-        var aukera = document.createElement("option");
-        aukera.value = "<?php echo $row['izena']; ?>";
-        aukera.textContent = "<?php echo $row['izena']; ?>";
-        zinema.appendChild(aukera);
-     }
-     ?>
-    }
-
- 
-    </script>
+    <script src = "sarrerakerosi.js"></script>
 </body>
 </html>
