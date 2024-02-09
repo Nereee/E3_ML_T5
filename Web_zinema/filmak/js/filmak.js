@@ -1,5 +1,14 @@
-sarrerakerosiButton.onclick = function (e) {
-    e.preventDefault();
+document.getElementById("sarrerakerosiButton").onclick = function (e) {
+    e.preventDefault(); 
 
-    window.location.replace('../../sarrerakerosi/sarrerakerosi.php');
+    var idFilm = document.getElementById("id_film").value;
+    window.location.href = '../../sarrerakerosi/sarrerakerosi.php?id_film=' + idFilm;
 };
+
+
+
+
+
+
+
+    
