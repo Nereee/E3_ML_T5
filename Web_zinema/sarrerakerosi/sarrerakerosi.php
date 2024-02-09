@@ -7,7 +7,7 @@
     <title>Sarrerak</title>
     <link rel="stylesheet" href="sarrerakerosi.css">
 </head>
-<body>
+<body onload="datuakegin()">
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
     <form action="sarrerakerosi.php" method="get" id="sarrerakerosi" name="sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
@@ -91,6 +91,11 @@
         <button id="sarrerakerosiButton">Sarrerak erosi</button>
     </form>
 
-    <script src = "sarrerakerosi.js"></script>
+    <script >
+function datuakegin(){
+    var idFilm = window.location.href.split("=")[1];
+    window.alert(idFilm);
+}
+    </script>
 </body>
 </html>
