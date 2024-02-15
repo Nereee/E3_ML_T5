@@ -1,43 +1,3 @@
-<?php
-
-if(isset($_GET['email']) && ($_GET['pasahitza'])){
-	
-	
-	
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "db_erronka3";
-
-// Konexioa sortu
-$mysqli = new mysqli($servername, $username, $password, $db);
-
-// Konexioa egiaztatu
-if ($mysqli->connect_error) {
-  die("Connection failed: " . $mysqli->connect_error);
-}
-
-//Kontsulta
-
-
-$email = $_GET["email"];
-$pwd = $_GET["pasahitza"]; 
-$sql = "select id from t_erabiltzaile where izena = '$email' and pasahitza = '$pwd'";
-$result = $mysqli->query($sql);
-
-if($result->num_rows > 0){
-    header("Location: index.html");
-}else{
-    echo "Pasahitza edo erabiltzailea ez dira zuzenak";
-}
-
-
-
-// Konexioa itxi
-$mysqli->close();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="eu">
 <head>
@@ -54,6 +14,17 @@ $mysqli->close();
         <label>
             <i class="fa-solid fa-mail-bulk"></i>
             <input placeholder="Emaila" type="text" id="email">
+            <?php
+                $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
+                if ($mysqli->connect_errno) {
+                    echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+                    exit();
+                }
+
+                    $mysqli->close();
+                    ?>
+
+
         </label>
         <label>
             <i class="fa-solid fa-lock"></i>

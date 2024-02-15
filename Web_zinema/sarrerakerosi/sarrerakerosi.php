@@ -32,25 +32,25 @@
             
             ?>
         </label>
-        <label for="zinemak">
-            <i class="fa-solid fa-film"></i>
-            <select id="zinema" onchange="zineAukeratu()">
-                <?php
-                
-                $filma = $_GET["id_film"];
-                $sql = " SELECT distinct zinema_id, izena From ZINEMA inner join SAIOA using (zinema_id) where filma_id = $filma";
+        <label for="zinema">
+        <i class="fa-solid fa-film"></i>
+        <select id="zinema" name="zinema_id" onchange="zineAukeratu()">
+            <?php
+            $filma = $_GET["id_film"];
+            $selectedZinema = isset($_GET["zinema_id"]) ? $_GET["zinema_id"] : ''; 
+            $sql = "SELECT DISTINCT zinema_id, izena FROM ZINEMA INNER JOIN SAIOA USING (zinema_id) WHERE filma_id = $filma";
 
-                $result = $mysqli->query($sql);
+            $result = $mysqli->query($sql);
 
-                while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
 
-                    echo "<option  value='" . $row['zinema_id'] . "'>" . $row['izena'] . "</option>";
-                    
-                }               
-                $result->free();
-                ?>
-            </select>
-        </label>
+                echo "<option value='" . $row['zinema_id'] . "' $aukera>" . $row['izena'] . "</option>";
+
+                }
+            $result->free();
+            ?>
+        </select>
+    </label>
         <label for="data">
             <i class="fa-solid fa-calendar"></i>
             <input type="date" id="data" onchange = "dataAukeratu()">
@@ -79,64 +79,25 @@
         <label for="kant">
     <i class="fa-solid fa-ticket"></i>
     <input type="number" id="kant" value="1" min="1" onchange="Prezioakalkulatu()">
-</label>
+        </label>
 
-<label for="prezioa">
-    <i class="fa-solid fa-money-bill"></i>
-    <?php
-    $sql = "SELECT prezioa FROM FILMA WHERE filma_id = $filma";
-    $result = $mysqli->query($sql);
-    
-    while ($row = $result->fetch_assoc()) {
-        echo "<input id='prezioa' onchange='Prezioakalkulatu()' readonly type='text' value=" . $row['prezioa'] . "> ";
-    }  
+        <label for="prezioa">
+            <i class="fa-solid fa-money-bill"></i>
+            <?php
+            $sql = "SELECT prezioa FROM FILMA WHERE filma_id = $filma";
+            $result = $mysqli->query($sql);
+            
+            while ($row = $result->fetch_assoc()) {
+                echo "<input id='prezioa' onchange='Prezioakalkulatu()' readonly type='text' value=" . $row['prezioa'] . "> ";
+            }  
 
-    $mysqli->close();
-    ?>
-</label>
+            $mysqli->close();
+            ?>
+        </label>
 
-</label>
+        </label>
         <button id="sarrerakerosiButton">Sarrerak erosi</button>
     </form>
-
-    <input type="hidden" value="1" id="id_film">
-    <script>
-        document.getElementById("sarrerakerosiButton").onclick = function (e) {
-        e.preventDefault(); 
-        
-        window.location.href = '../logina/logina.php'
-        };
-        function datuakegin(){
-            var idFilm = window.location.href.split("=")[1];
-        }
-
-        function Prezioakalkulatu() {
-            var kant = document.getElementById("kant").value;
-            var prezioa = parseFloat(kant) * 9.50; 
-            document.getElementById("prezioa").value = prezioa.toFixed(2); 
-        }
-
-        function setMinDate() {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-
-        today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("data").min = today;
-    }
-    function zineAukeratu(){
-        var url = window.location.href.split("&")[0];
-        var zine = document.getElementById("zinema").value;
-         window.location.href = (url+ "&zinema=" + zine);
-
-    }
-        function dataAukeratu(){
-            var url = window.location.href.split("%")[0];
-        var data = document.getElementById("data").value;
-         window.location.href = (url+ "%data=" + data);
-    }
-    window.onload = setMinDate;
-    </script>
+    <script src="sarrerakerosi.js"></script>
 </body>
 </html>
