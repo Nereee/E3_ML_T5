@@ -1,0 +1,31 @@
+main {
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+    
+}
+
+article {
+    text-align: center;
+    margin: 20px;
+}
+
+
+article a {
+    color: black;
+    font-size: 50px;
+    text-align: center;
+}
+
+article p {
+    font-size: 28px;
+    margin: 10px;
+    width: 100%;
+}
+article img,
+article iframe {
+    padding: 5px;
+    width: 700px;
+    max-width: 100%;
+}
+
