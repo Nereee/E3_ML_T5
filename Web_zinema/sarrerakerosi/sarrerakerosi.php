@@ -13,56 +13,57 @@
         <?php
         if(isset($_GET["zinema_id"])){
             ?>
-            window.alert("eg")
+           
             document.getElementById("zinema").value = <?php echo $_GET["zinema_id"] ?>;
         <?php    
         }
         ?>
     }
-document.getElementById("sarrerakerosiButton").onclick = function (e) {
-    e.preventDefault(); 
+        function erosi() {
+        
+        
+        window.location.href = '../logina/logina.php'
+        };
     
-    window.location.href = '../logina/logina.php'
-    };
-   
 
-    function Prezioakalkulatu() {
-        var kant = document.getElementById("kant").value;
-        var prezioa = parseFloat(kant) * 9.50; 
-        document.getElementById("prezioa").value = prezioa.toFixed(2); 
+        function Prezioakalkulatu() {
+            var kant = document.getElementById("kant").value;
+            var prezioa = parseFloat(kant) * 9.50; 
+            document.getElementById("prezioa").value = prezioa.toFixed(2); 
+        }
+
+        function setMinDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("data").min = today;
     }
+        function zineAukeratu(){
+        var url = window.location.href.split("&")[0];
+        var zine = document.getElementById("zinema").value;
+        window.location.href = (url+ "&zinema=" + zine);
 
-    function setMinDate() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("data").min = today;
-}
-function zineAukeratu(){
-    var url = window.location.href.split("&")[0];
-    var zine = document.getElementById("zinema").value;
-     window.location.href = (url+ "&zinema=" + zine);
-
-}
-    function dataAukeratu(){
-        var url = window.location.href.split("%")[0];
-    var data = document.getElementById("data").value;
-     window.location.href = (url+ "%data=" + data);
-}
-window.onload = setMinDate;
+    }
+        function dataAukeratu(){
+            var url = window.location.href.split("&")[0];
+        var data = document.getElementById("data").value;
+        window.location.href = (url+ "&data=" + data);
+    }
+        window.onload = setMinDate;
 
     </script>
 
 </head>
 <body onload="datuakegin()">
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
-    <form action="sarrerakerosi.php" method="get" id="sarrerakerosi" name="sarrerakerosi">
+    <form method="get" id="sarrerakerosi" name="sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
-        <label for="pelikula">
-            Pelikula: 
+        <label for="pelikula">            Pelikula:         </label>
+    <select id= "id_film">
+
             <?php
             $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
             if ($mysqli->connect_errno) {
@@ -72,15 +73,15 @@ window.onload = setMinDate;
 
             $idfilm = $_GET['id_film'];
 
-            $sql = "SELECT izena FROM FILMA WHERE filma_id = $idfilm ";
+            $sql = "SELECT izena, filma_id FROM FILMA WHERE filma_id = $idfilm ";
             $emaitza = $mysqli->query($sql);
 
             while ($row = $emaitza->fetch_assoc()) {
-                echo "<input readonly type='text' value=" . $row['izena'] . "> ";
+                echo "<option value='" . $row['filma_id'] . "'>" . $row['izena'] ."</option>";
             }  
             
             ?>
-        </label>
+            </select>
         <label for="zinema">
         <i class="fa-solid fa-film"></i>
         <select id="zinema" name="zinema_id" onchange="zineAukeratu()">
@@ -93,7 +94,7 @@ window.onload = setMinDate;
 
             while ($row = $result->fetch_assoc()) {
 
-                echo "<option value='" . $row['zinema_id'] . "' $aukera>" . $row['izena'] . "</option>";
+                echo "<option value='" . $row['zinema_id'] . "'>" . $row['izena'] . "</option>";
 
                 }
 
@@ -146,7 +147,7 @@ window.onload = setMinDate;
         </label>
 
         </label>
-        <button id="sarrerakerosiButton">Sarrerak erosi</button>
+        <input type="button" id="sarrerakerosiButton" value ="Sarrerak erosi" onclick ="erosi()">
     </form>
     
 </body>

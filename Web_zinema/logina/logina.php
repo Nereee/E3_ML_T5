@@ -14,15 +14,7 @@
         <label>
             <i class="fa-solid fa-mail-bulk"></i>
             <input placeholder="Emaila" type="text" id="email">
-            <?php
-                $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
-                if ($mysqli->connect_errno) {
-                    echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
-                    exit();
-                }
-
-                    $mysqli->close();
-                    ?>
+                    
 
 
         </label>
@@ -31,9 +23,50 @@
             <input placeholder="Pasahitza" type="password" id="pasahitza">
         </label>
         
-        <button id="button">Sartu</button>
+        <button id="button" onclick = "logina()">Sartu</button>
     </form>
     
-    <script src="logina.js"></script>
+    <script>
+    function logina() {
+    window.location(index.html)
+    };
+
+
+                <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $db = "db_elorrietazinemaT5";
+
+                // Crear conexión
+                $conn = new mysqli($servername, $username, $password, $db);
+
+                // Verificar conexión
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $email = $_POST['email'];
+                $pwd = $_POST['pasahitza'];
+
+                // Consulta preparada para evitar SQL injection
+                $stmt = $conn->prepare("SELECT email FROM bezeroa WHERE email = ? AND pasahitza = ?");
+                $stmt->bind_param("ss", $email, $pwd);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    header("Location: ../index.html");
+                    exit(); 
+                } else {
+                    echo "<script>alert('Pasahitza edo erabiltzailea ez dira zuzenak');</script>";
+                }
+
+                $stmt->close();
+                $conn->close();
+            }
+            ?>
+    </script>
 </body>
 </html>
