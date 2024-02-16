@@ -7,6 +7,55 @@
     <title>Sarrerak</title>
     <link rel="stylesheet" href="sarrerakerosi.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+         function datuakegin(){
+        var idFilm = window.location.href.split("=")[1];
+        <?php
+        if(isset($_GET["zinema_id"])){
+            ?>
+            window.alert("eg")
+            document.getElementById("zinema").value = <?php echo $_GET["zinema_id"] ?>;
+        <?php    
+        }
+        ?>
+    }
+document.getElementById("sarrerakerosiButton").onclick = function (e) {
+    e.preventDefault(); 
+    
+    window.location.href = '../logina/logina.php'
+    };
+   
+
+    function Prezioakalkulatu() {
+        var kant = document.getElementById("kant").value;
+        var prezioa = parseFloat(kant) * 9.50; 
+        document.getElementById("prezioa").value = prezioa.toFixed(2); 
+    }
+
+    function setMinDate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("data").min = today;
+}
+function zineAukeratu(){
+    var url = window.location.href.split("&")[0];
+    var zine = document.getElementById("zinema").value;
+     window.location.href = (url+ "&zinema=" + zine);
+
+}
+    function dataAukeratu(){
+        var url = window.location.href.split("%")[0];
+    var data = document.getElementById("data").value;
+     window.location.href = (url+ "%data=" + data);
+}
+window.onload = setMinDate;
+
+    </script>
+
 </head>
 <body onload="datuakegin()">
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
@@ -47,6 +96,7 @@
                 echo "<option value='" . $row['zinema_id'] . "' $aukera>" . $row['izena'] . "</option>";
 
                 }
+
             $result->free();
             ?>
         </select>
@@ -98,6 +148,6 @@
         </label>
         <button id="sarrerakerosiButton">Sarrerak erosi</button>
     </form>
-    <script src="sarrerakerosi.js"></script>
+    
 </body>
 </html>
