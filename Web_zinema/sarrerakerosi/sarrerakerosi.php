@@ -9,15 +9,66 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
          function datuakegin(){
-        var idFilm = window.location.href.split("=")[1];
-        <?php
-        if(isset($_GET["zinema_id"])){
+            var idFilm = window.location.href.split("=")[1];
+            <?php
+            $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
+            if ($mysqli->connect_errno) {
+                echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+                exit();
+            }
+
+            $idfilm = $_GET['id_film'];
+
+            $sql = "SELECT izena, filma_id FROM FILMA WHERE filma_id = $idfilm ";
+            $emaitza = $mysqli->query($sql);
+
+            while ($row = $emaitza->fetch_assoc()) {
+                ?>
+
+                var option = document.createElement("option");
+                option.text = '<?php echo $row['izena'] ?>';
+                option.value = '<?php echo $row['filma_id'] ?>';
+                document.getElementById("id_film").appendChild(option);
+                <?php
+
+
+                // echo "<option value='" . $row['filma_id'] . "'>" . $row['izena'] ."</option>";
+            }  
+
+
+
+            $filma = $_GET["id_film"];
+            $selectedZinema = isset($_GET["zinema_id"]) ? $_GET["zinema_id"] : ''; 
+            $sql = "SELECT DISTINCT zinema_id, izena FROM ZINEMA INNER JOIN SAIOA USING (zinema_id) WHERE filma_id = $filma";
+
+            $result = $mysqli->query($sql);
+
+            while ($row = $result->fetch_assoc()) {
+                ?>
+
+                var option = document.createElement("option");
+                option.text = '<?php echo $row['izena'] ?>';
+                option.value = '<?php echo $row['zinema_id'] ?>';
+                document.getElementById("zinema").appendChild(option);
+                <?php
+
+
+                // echo "<option value='" . $row['zinema_id'] . "'>" . $row['izena'] . "</option>";
+
+                }
+
+            $result->free();
+
+       
+        
+        if(isset($_GET["zinema"])){
             ?>
-           
-            document.getElementById("zinema").value = <?php echo $_GET["zinema_id"] ?>;
+            document.getElementById("zinema").value = <?php echo $_GET["zinema"] ?>;
         <?php    
         }
         ?>
+
+
     }
         function erosi() {
         
@@ -48,9 +99,11 @@
 
     }
         function dataAukeratu(){
-            var url = window.location.href.split("&")[0];
+            var url = window.location.href.split("?")[0] ;
         var data = document.getElementById("data").value;
-        window.location.href = (url+ "&data=" + data);
+        var zinema = document.getElementById("zinema").value;
+        var filma = document.getElementById("id_film").value
+        window.location.href = (url+ "?id_film=" + filma + "&zinema=" + zinema + "&data=" + data);
     }
         window.onload = setMinDate;
 
@@ -65,20 +118,7 @@
     <select id= "id_film">
 
             <?php
-            $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
-            if ($mysqli->connect_errno) {
-                echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
-                exit();
-            }
-
-            $idfilm = $_GET['id_film'];
-
-            $sql = "SELECT izena, filma_id FROM FILMA WHERE filma_id = $idfilm ";
-            $emaitza = $mysqli->query($sql);
-
-            while ($row = $emaitza->fetch_assoc()) {
-                echo "<option value='" . $row['filma_id'] . "'>" . $row['izena'] ."</option>";
-            }  
+           
             
             ?>
             </select>
@@ -86,19 +126,7 @@
         <i class="fa-solid fa-film"></i>
         <select id="zinema" name="zinema_id" onchange="zineAukeratu()">
             <?php
-            $filma = $_GET["id_film"];
-            $selectedZinema = isset($_GET["zinema_id"]) ? $_GET["zinema_id"] : ''; 
-            $sql = "SELECT DISTINCT zinema_id, izena FROM ZINEMA INNER JOIN SAIOA USING (zinema_id) WHERE filma_id = $filma";
-
-            $result = $mysqli->query($sql);
-
-            while ($row = $result->fetch_assoc()) {
-
-                echo "<option value='" . $row['zinema_id'] . "'>" . $row['izena'] . "</option>";
-
-                }
-
-            $result->free();
+            
             ?>
         </select>
     </label>
