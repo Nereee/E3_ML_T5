@@ -70,13 +70,8 @@
 
 
     }
-        function erosi() {
         
-        
-        window.location.href = '../logina/logina.php'
-        };
     
-
         function Prezioakalkulatu() {
             var kant = document.getElementById("kant").value;
             var prezioa = parseFloat(kant) * 9.50; 
@@ -105,6 +100,11 @@
         var filma = document.getElementById("id_film").value
         window.location.href = (url+ "?id_film=" + filma + "&zinema=" + zinema + "&data=" + data);
     }
+
+    function erosi() {
+        window.location.href = '../logina/logina.php'
+        };
+
         window.onload = setMinDate;
 
     </script>
@@ -114,7 +114,7 @@
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
     <form method="get" id="sarrerakerosi" name="sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
-        <label for="pelikula">            Pelikula:         </label>
+        <label for="pelikula">Pelikula:</label>
     <select id= "id_film">
 
             <?php
