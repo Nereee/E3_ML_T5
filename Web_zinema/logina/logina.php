@@ -1,10 +1,6 @@
 <?php
-session_start();
-
-
+session_start(); 
             if(isset($_POST['email']) && isset($_POST['pasahitza'])){
-            // $_SESSION['id_email'] = $_GET["email"];  
-            // $_SESSION['id_pasahitza'] = $_GET['pasahitza'];
             $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
             if ($mysqli->connect_errno) {
                 echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
@@ -19,6 +15,7 @@ session_start();
                 
             
                 if ($result->num_rows > 0) {
+                    $_SESSION['email'] = $email;
                     header("Location: ../tiketa/tiketa.php");
                     exit(); 
                 } else {
@@ -63,8 +60,8 @@ session_start();
     
     <script>
     function logina() {
-    window.location.href = '../tiketa/tiketa.html'
-
+    var url = '../logina/logina.php?' + 'id_film=' + idFilm + '&zinema=' + idZinema + '&data=' + data + '&kant=' + kant + '&prezioa=' + prezioa; 
+    window.location.href = url;
     };
     </script>
 </body>

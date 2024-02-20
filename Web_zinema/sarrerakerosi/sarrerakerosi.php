@@ -98,8 +98,9 @@ session_start();
             var data = document.getElementById("data").value;
             var zinema = document.getElementById("zinema").value;
             var filma = document.getElementById("id_film").value;
-          
-            window.location.href = (url + "?id_film=" + filma + "&zinema=" + zinema + "&data=" + data);
+            var kant = document.getElementById("kant").value; 
+            window.location.href = (url + "?id_film=" + filma + "&zinema=" + zinema + "&data=" + data + "&kant=" + kant);
+
             <?php
             $_SESSION['id_film'] = $_GET['id_film']; 
 
@@ -107,23 +108,36 @@ session_start();
             $_SESSION['id_zinema'] = $_GET["zinema"];  
             $_SESSION['id_data'] = $_GET['data'];   
             $_SESSION['id_saioa'] = $_GET['saioak'];  
-            
+            $_SESSION['id_kant'] = $_GET['kant'];  
+            $_SESSION['id_prezioa'] = $_GET['prezioa'];   
             }
            
             ?>
         }
 
+        function Prezioakalkulatu() {
+            var url = window.location.href;
+            
+
+            var kant = document.getElementById("kant").value;
+            var prezioa = parseFloat(kant) * 9.50; 
+            document.getElementById("prezioa").value = prezioa.toFixed(2); 
+        }
+      
         function erosi() {
-<?php
-  if(isset($_GET["zinema"])&& isset($_GET['data'])&& isset($_GET['saioak'])&& isset($_GET['kant'])&& isset($_GET['prezioa']) ) {
-            $_SESSION['id_kant'] = $_GET['kant'];  
-            $_SESSION['id_prezioa'] = $_GET['prezioa'];   
-  }
-            ?>
-       
-            var url = window.location.href.split("?")[1];
-            window.location.href = '../logina/logina.php' + "?"+ url
-        };
+    var idFilm = document.getElementById("id_film").value;
+    var idZinema = document.getElementById("zinema").value;
+    var data = document.getElementById("data").value;
+    var kant = document.getElementById("kant").value; 
+    var prezioa = document.getElementById("prezioa").value; 
+    
+
+    var url = '../logina/logina.php?' + 'id_film=' + idFilm + '&zinema=' + idZinema + '&data=' + data + '&kant=' + kant + '&prezioa=' + prezioa; 
+    
+
+    window.location.href = url;
+}
+
 
         window.onload = function() {
             setMinDate();
