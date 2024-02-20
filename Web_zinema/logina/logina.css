@@ -63,7 +63,7 @@ form .link {
 }
 
 /*Sartu botoia*/
-form button {
+form input button {
     color: #ffc65d;
     border: none;
     background: linear-gradient(to right, #000000, #000000);

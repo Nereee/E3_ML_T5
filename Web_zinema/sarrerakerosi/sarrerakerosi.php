@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="eu">
 <head>
@@ -24,6 +27,7 @@
             $emaitza = $mysqli->query($sql);
 
             while ($row = $emaitza->fetch_assoc()) {
+                $_SESSION ['filma_izena'] = $row['izena'] ;
             ?>
 
             var option = document.createElement("option");
@@ -35,11 +39,13 @@
 
             $filma = $_GET["id_film"];
             $selectedZinema = isset($_GET["zinema_id"]) ? $_GET["zinema_id"] : ''; 
+           
             $sql = "SELECT DISTINCT zinema_id, izena FROM ZINEMA INNER JOIN SAIOA USING (zinema_id) WHERE filma_id = $filma";
 
             $result = $mysqli->query($sql);
 
             while ($row = $result->fetch_assoc()) {
+                $_SESSION ['zinema_izena'] = $row['izena'] ;
             ?>
 
             var option = document.createElement("option");
@@ -92,11 +98,31 @@
             var data = document.getElementById("data").value;
             var zinema = document.getElementById("zinema").value;
             var filma = document.getElementById("id_film").value;
+          
             window.location.href = (url + "?id_film=" + filma + "&zinema=" + zinema + "&data=" + data);
+            <?php
+            $_SESSION['id_film'] = $_GET['id_film']; 
+
+            if(isset($_GET["zinema"])&& isset($_GET['data'])&& isset($_GET['saioak'])&& isset($_GET['kant'])&& isset($_GET['prezioa']) ) {
+            $_SESSION['id_zinema'] = $_GET["zinema"];  
+            $_SESSION['id_data'] = $_GET['data'];   
+            $_SESSION['id_saioa'] = $_GET['saioak'];  
+            
+            }
+           
+            ?>
         }
 
         function erosi() {
-            window.location.href = '../logina/logina.php'
+<?php
+  if(isset($_GET["zinema"])&& isset($_GET['data'])&& isset($_GET['saioak'])&& isset($_GET['kant'])&& isset($_GET['prezioa']) ) {
+            $_SESSION['id_kant'] = $_GET['kant'];  
+            $_SESSION['id_prezioa'] = $_GET['prezioa'];   
+  }
+            ?>
+       
+            var url = window.location.href.split("?")[1];
+            window.location.href = '../logina/logina.php' + "?"+ url
         };
 
         window.onload = function() {
@@ -122,16 +148,19 @@
         </label>
         <label for="saioak">
             <i class="fa-solid fa-clock"></i>
-            <select id="saioak">
+            <select name = "saioak" id="saioak">
             <?php
                 $data = $_GET["data"];
+                $zinema = $_GET["zinema"];
 
-                $sql = "SELECT ordutegia, f.izena, eguna FROM saioa s INNER JOIN filma f USING(filma_id) WHERE s.filma_id = $filma AND eguna = '$data'";
+                $sql = "SELECT ordutegia, f.izena, eguna FROM saioa s INNER JOIN filma f USING(filma_id) WHERE s.filma_id = $filma AND eguna = '$data' AND s.zinema_id = '$zinema'";
 
                 $result = $mysqli->query($sql);
 
                 while ($row = $result->fetch_assoc()) {
                     echo "<option value='" . $row['eguna'] . "'>" . $row['ordutegia'] . "</option>";
+                    $_SESSION ['data'] = $row['eguna'] ;
+                    $_SESSION ['ordua'] = $row['ordutegia'] ;
                 }
 
                 $result->free();
@@ -143,11 +172,11 @@
             
         <label for="kant">
             <i class="fa-solid fa-ticket"></i>
-            <input type="number" id="kant" value="1" min="1" onchange="Prezioakalkulatu()">
-        </label>
+            <input type="number" id="kant" name = "kant" min="1" onchange="Prezioakalkulatu()">
+        </label> 
         <label for="prezioa">
             <i class="fa-solid fa-money-bill"></i>
-            <input id='prezioa' onchange='Prezioakalkulatu()' readonly type='text'>
+            <input id='prezioa' name = "prezioa" onchange='Prezioakalkulatu()' readonly type='text'>
         </label>
         <input type="button" id="sarrerakerosiButton" value="Sarrerak erosi" onclick="erosi()">
     </form>
