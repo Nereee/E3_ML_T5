@@ -99,6 +99,7 @@ session_start();
             var zinema = document.getElementById("zinema").value;
             var filma = document.getElementById("id_film").value;
             var kant = document.getElementById("kant").value; 
+            
             window.location.href = (url + "?id_film=" + filma + "&zinema=" + zinema + "&data=" + data + "&kant=" + kant);
 
             <?php
@@ -131,10 +132,9 @@ session_start();
     var kant = document.getElementById("kant").value; 
     var prezioa = document.getElementById("prezioa").value; 
     
-
+    
     var url = '../logina/logina.php?' + 'id_film=' + idFilm + '&zinema=' + idZinema + '&data=' + data + '&kant=' + kant + '&prezioa=' + prezioa; 
     
-
     window.location.href = url;
 }
 
