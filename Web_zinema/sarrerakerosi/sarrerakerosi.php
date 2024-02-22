@@ -150,8 +150,7 @@ session_start();
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
     <form method="get" id="sarrerakerosi" name="sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
-        <label for="pelikula">Pelikula:</label>
-        <select id="id_film"></select>
+        <select id="id_film"></select><br>
         <label for="zinema">
             <i class="fa-solid fa-film"></i>
             <select id="zinema" name="zinema_id" onchange="zineAukeratu()"></select>
@@ -184,15 +183,15 @@ session_start();
                 <option></option>
 
             </select>
-            
+            <br><br>
         <label for="kant">
             <i class="fa-solid fa-ticket"></i>
             <input type="number" id="kant" name = "kant" min="1" onchange="Prezioakalkulatu()">
-        </label> 
+        </label> <br><br>
         <label for="prezioa">
             <i class="fa-solid fa-money-bill"></i>
             <input id='prezioa' name = "prezioa" onchange='Prezioakalkulatu()' readonly type='text'>
-        </label>
+        </label><br><br>
         <button type="button" id="sarrerakerosiButton" onclick="erosi()" style="color: #ffc65d; border: none; background: linear-gradient(to right, #000000, #000000); padding: 10px 15px; cursor: pointer; font-size: 20px;">Sarrerak erosi</button>
     </form>
 </body>
