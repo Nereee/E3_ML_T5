@@ -79,22 +79,12 @@ session_start();
 
         
         $sqlerosketa = "INSERT INTO erosketak (dirutotala, jatorria, Bezero_id, Deskontua) VALUES ($prezioa, 'online', $bezero_id, 0)";
-        if ($mysqli->query($sqlerosketa)) {
-            echo "Erosketa ondo gehitu da.";
-        } else {
+      
+            if ($mysqli->query($sqlerosketa)) {
+             echo "Erosketa ondo gehitu da.";
+         } else {
             echo "Errorea erosketa gehitzean: " . $mysqli->error;
         }
-            $erosketak_id = $mysqli->insert_id;
-
-
-            $sqlsarrera = "INSERT INTO SARRERA (erosketa_id, saioa_id, kant_sr) VALUES ($erosketak_id, $saioa_id, $kant)";
-            if ($mysqli->query($sqlsarrera)) {
-                echo "Sarrera ondo gehitu da.";
-            } else {
-                echo "Errorea sarrera gehitzean: " . $mysqli->error;
-            }
-        
-        exit();
 
         ?>
         window.location.href = '../index.html'
