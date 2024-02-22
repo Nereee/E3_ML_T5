@@ -17,10 +17,11 @@ session_start();
 
         <table>
             <tr>
-                <th><i class="fas fa-user"></i> <u>Bezeroa</u></th>
-                <td>
-                <?php echo isset($_SESSION['email']) ? explode('@', $_SESSION['email'])[0] : '';  ?>
-                </td>
+            <th><i class="fas fa-user"></i> <u>Bezeroa</u></th>
+            <td>
+            <?php echo isset($_SESSION['email']) ? ucfirst(explode('@', $_SESSION['email'])[0]) : '';  ?>
+            </td>
+
             </tr>
             <tr>
                 <th><i class="fas fa-film"></i> <u>Zinema</u></th>
