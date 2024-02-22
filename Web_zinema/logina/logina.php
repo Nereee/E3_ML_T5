@@ -49,7 +49,7 @@ $row = $result->fetch_assoc();
         <input placeholder="Pasahitza" type="password" id="pasahitza" name="pasahitza" required>
     </label>
     
-    <input type="submit" id="loginbotoia" value="sartu">
+    <input type="submit" id="loginbotoia" class="custom-button" value="Sartu" style="color: #ffc65d; border: none; background: linear-gradient(to right, #000000, #000000); padding: 10px 15px; cursor: pointer; font-size: 20px;">
 </form>
 </body>
 </html>
