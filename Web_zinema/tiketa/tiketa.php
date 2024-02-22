@@ -17,11 +17,10 @@ session_start();
 
         <table>
             <tr>
-            <th><i class="fas fa-user"></i> <u>Bezeroa</u></th>
-            <td>
-            <?php echo isset($_SESSION['email']) ? ucfirst(explode('@', $_SESSION['email'])[0]) : '';  ?>
-            </td>
-
+                <th><i class="fas fa-user"></i> <u>Bezeroa</u></th>
+                <td>
+                <?php echo isset($_SESSION['email']) ? explode('@', $_SESSION['email'])[0] : '';  ?>
+                </td>
             </tr>
             <tr>
                 <th><i class="fas fa-film"></i> <u>Zinema</u></th>
@@ -67,6 +66,37 @@ session_start();
     
     <script>
     function tiketa() {
+        <?php
+        $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
+        if ($mysqli->connect_errno) {
+            echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+            exit();
+        }
+        $prezioa = $_GET['prezioa'];
+        $bezero_id = $_SESSION['bezero_id'];
+        $saioa_id = $_SESSION['id_saioa'];
+        $kant = $_GET['kant'];
+
+        
+        $sqlerosketa = "INSERT INTO erosketak (dirutotala, jatorria, Bezero_id, Deskontua) VALUES ($prezioa, 'online', $bezero_id, 0)";
+        if ($mysqli->query($sqlerosketa)) {
+            echo "Erosketa ondo gehitu da.";
+        } else {
+            echo "Errorea erosketa gehitzean: " . $mysqli->error;
+        }
+            $erosketak_id = $mysqli->insert_id;
+
+
+            $sqlsarrera = "INSERT INTO SARRERA (erosketa_id, saioa_id, kant_sr) VALUES ($erosketak_id, $saioa_id, $kant)";
+            if ($mysqli->query($sqlsarrera)) {
+                echo "Sarrera ondo gehitu da.";
+            } else {
+                echo "Errorea sarrera gehitzean: " . $mysqli->error;
+            }
+        
+        exit();
+
+        ?>
         window.location.href = '../index.html'
     };
     </script>

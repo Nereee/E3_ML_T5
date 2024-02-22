@@ -150,7 +150,8 @@ session_start();
     <a href="../index.html" id="atzera"><img src="../img/fletxa.png" alt="fletxa"></a>
     <form method="get" id="sarrerakerosi" name="sarrerakerosi">
         <h1 class="title">Sarrerak</h1>
-        <select id="id_film"></select><br><br>
+        <label for="pelikula">Pelikula:</label>
+        <select id="id_film"></select>
         <label for="zinema">
             <i class="fa-solid fa-film"></i>
             <select id="zinema" name="zinema_id" onchange="zineAukeratu()"></select>
@@ -166,7 +167,7 @@ session_start();
                 $data = $_GET["data"];
                 $zinema = $_GET["zinema"];
 
-                $sql = "SELECT ordutegia, f.izena, eguna FROM saioa s INNER JOIN filma f USING(filma_id) WHERE s.filma_id = $filma AND eguna = '$data' AND s.zinema_id = '$zinema'";
+                $sql = "SELECT saioa_id, ordutegia, f.izena, eguna FROM saioa s INNER JOIN filma f USING(filma_id) WHERE s.filma_id = $filma AND eguna = '$data' AND s.zinema_id = '$zinema'";
 
                 $result = $mysqli->query($sql);
 
@@ -174,6 +175,7 @@ session_start();
                     echo "<option value='" . $row['eguna'] . "'>" . $row['ordutegia'] . "</option>";
                     $_SESSION ['data'] = $row['eguna'] ;
                     $_SESSION ['ordua'] = $row['ordutegia'] ;
+                    $_SESSION ['id_saioa'] = $row['saioa_id'] ;
                 }
 
                 $result->free();
@@ -183,16 +185,15 @@ session_start();
 
             </select>
             
-        <label for="kant"><br><br>
+        <label for="kant">
             <i class="fa-solid fa-ticket"></i>
             <input type="number" id="kant" name = "kant" min="1" onchange="Prezioakalkulatu()">
-        </label> <br><br>
+        </label> 
         <label for="prezioa">
             <i class="fa-solid fa-money-bill"></i>
             <input id='prezioa' name = "prezioa" onchange='Prezioakalkulatu()' readonly type='text'>
-        </label><br><br>
-        <button type="button" id="sarrerakerosiButton" onclick="erosi()">Sarrerak erosi</button>
-
+        </label>
+        <input type="button" id="sarrerakerosiButton" value="Sarrerak erosi" onclick="erosi()">
     </form>
 </body>
 </html>

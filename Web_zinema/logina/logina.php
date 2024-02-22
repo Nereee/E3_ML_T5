@@ -13,9 +13,10 @@ if(isset($_POST['email']) && isset($_POST['pasahitza'])) {
 
     $query = "SELECT Bezero_id FROM bezeroa WHERE email = '$email' AND pasahitza = '$pwd'";
     $result = $mysqli->query($query);
-
+$row = $result->fetch_assoc();
     if ($result->num_rows > 0) {
         $_SESSION['email'] = $email;
+        $_SESSION['bezero_id'] =$row['Bezero_id'];
         header("Location: ../tiketa/tiketa.php?" . $_SERVER['QUERY_STRING']);
         exit();
     } else {
@@ -48,10 +49,7 @@ if(isset($_POST['email']) && isset($_POST['pasahitza'])) {
         <input placeholder="Pasahitza" type="password" id="pasahitza" name="pasahitza" required>
     </label>
     
-    <input type="submit" id="loginbotoia" class="custom-button" value="Sartu" style="color: #ffc65d; border: none; background: linear-gradient(to right, #000000, #000000); padding: 10px 15px; cursor: pointer; font-size: 20px;">
-
-
-
+    <input type="submit" id="loginbotoia" value="sartu">
 </form>
 </body>
 </html>
