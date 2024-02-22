@@ -1,43 +1,31 @@
 <?php
+session_start();
 
-if(isset($_GET['email']) && ($_GET['pasahitza'])){
-	
-	
-	
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "db_erronka3";
+if(isset($_POST['email']) && isset($_POST['pasahitza'])) {
+    $email = $_POST['email'];
+    $pwd = $_POST['pasahitza'];
 
-// Konexioa sortu
-$mysqli = new mysqli($servername, $username, $password, $db);
+    $mysqli = new mysqli("localhost", "root", "", "db_ElorrietazinemaT5");
+    if ($mysqli->connect_errno) {
+        echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+        exit();
+    }
 
-// Konexioa egiaztatu
-if ($mysqli->connect_error) {
-  die("Connection failed: " . $mysqli->connect_error);
-}
+    $query = "SELECT Bezero_id FROM bezeroa WHERE email = '$email' AND pasahitza = '$pwd'";
+    $result = $mysqli->query($query);
+$row = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $_SESSION['email'] = $email;
+        $_SESSION['bezero_id'] =$row['Bezero_id'];
+        header("Location: ../tiketa/tiketa.php?" . $_SERVER['QUERY_STRING']);
+        exit();
+    } else {
+        echo '<script>window.alert("Pasahitza edo erabiltzailea ez dira zuzenak");</script>';
+    }
 
-//Kontsulta
-
-
-$email = $_GET["email"];
-$pwd = $_GET["pasahitza"]; 
-$sql = "select id from t_erabiltzaile where izena = '$email' and pasahitza = '$pwd'";
-$result = $mysqli->query($sql);
-
-if($result->num_rows > 0){
-    header("Location: index.html");
-}else{
-    echo "Pasahitza edo erabiltzailea ez dira zuzenak";
-}
-
-
-
-// Konexioa itxi
-$mysqli->close();
+    $mysqli->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="eu">
 <head>
@@ -47,22 +35,21 @@ $mysqli->close();
     <title>Logina</title>
     <link rel="stylesheet" href="logina.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <form action="logina.php" method="post">
-        <h1 class="title">Hasi Saioa</h1>
-        <label>
-            <i class="fa-solid fa-mail-bulk"></i>
-            <input placeholder="Emaila" type="text" id="email">
-        </label>
-        <label>
-            <i class="fa-solid fa-lock"></i>
-            <input placeholder="Pasahitza" type="password" id="pasahitza">
-        </label>
-        
-        <button id="button">Sartu</button>
-    </form>
+</head><body>
+
+
+<form action="" method="post"> 
+    <h1 class="title">Hasi Saioa</h1>
+    <label>
+        <i class="fa-solid fa-mail-bulk"></i>
+        <input placeholder="Emaila" type="text" id="email" name="email" required>
+    </label>
+    <label>
+        <i class="fa-solid fa-lock"></i>
+        <input placeholder="Pasahitza" type="password" id="pasahitza" name="pasahitza" required>
+    </label>
     
-    <script src="logina.js"></script>
+    <input type="submit" id="loginbotoia" class="custom-button" value="Sartu" style="color: #ffc65d; border: none; background: linear-gradient(to right, #000000, #000000); padding: 10px 15px; cursor: pointer; font-size: 20px;">
+</form>
 </body>
 </html>
