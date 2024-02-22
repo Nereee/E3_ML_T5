@@ -193,7 +193,7 @@ session_start();
             <i class="fa-solid fa-money-bill"></i>
             <input id='prezioa' name = "prezioa" onchange='Prezioakalkulatu()' readonly type='text'>
         </label>
-        <input type="button" id="sarrerakerosiButton" value="Sarrerak erosi" onclick="erosi()">
+        <button type="button" id="sarrerakerosiButton" onclick="erosi()" style="color: #ffc65d; border: none; background: linear-gradient(to right, #000000, #000000); padding: 10px 15px; cursor: pointer; font-size: 20px;">Sarrerak erosi</button>
     </form>
 </body>
 </html>
